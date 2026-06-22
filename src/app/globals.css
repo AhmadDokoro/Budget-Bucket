@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ---------- Light theme (default :root) ---------- */
+  :root {
+    --background: 240 20% 98%;
+    --foreground: 240 12% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 12% 10%;
+
+    --primary: 158 79% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 8% 94%;
+    --secondary-foreground: 240 10% 18%;
+
+    --muted: 240 8% 94%;
+    --muted-foreground: 240 5% 42%;
+
+    --accent: 240 8% 94%;
+    --accent-foreground: 240 12% 10%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 158 79% 35%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 35 92% 45%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 240 8% 89%;
+    --input: 240 8% 87%;
+    --ring: 158 79% 40%;
+
+    --radius: 1rem;
+
+    /* Elevation tokens — soft, layered shadows in light mode. */
+    --shadow-card: 0 1px 2px hsl(240 12% 10% / 0.04),
+      0 8px 24px -12px hsl(240 12% 10% / 0.12);
+    --shadow-pop: 0 12px 40px -12px hsl(240 12% 10% / 0.22);
+
+    color-scheme: light;
+  }
+
+  /* ---------- Dark theme ---------- */
+  .dark {
+    --background: 240 10% 5%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 8% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --primary: 158 84% 45%;
+    --primary-foreground: 160 90% 8%;
+
+    --secondary: 240 6% 16%;
+    --secondary-foreground: 0 0% 92%;
+
+    --muted: 240 6% 16%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 240 6% 16%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 158 84% 45%;
+    --success-foreground: 160 90% 8%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 38 92% 10%;
+
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 158 84% 45%;
+
+    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.4);
+    --shadow-pop: 0 18px 50px -12px hsl(0 0% 0% / 0.7);
+
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    overscroll-behavior-y: none;
+  }
+
+  /* Smooth, flash-free theme switching. Values are already correct before the
+     first paint (next-themes sets the class in a blocking <head> script), so
+     this only animates *deliberate* theme changes, never the initial load. */
+  body,
+  .theme-transition,
+  .theme-transition * {
+    transition:
+      background-color 0.32s ease,
+      border-color 0.32s ease,
+      color 0.32s ease,
+      fill 0.32s ease,
+      stroke 0.32s ease;
+  }
+
+  /* Hide number input spinners — money fields use inputMode="decimal". */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-pop {
+    box-shadow: var(--shadow-pop);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
